@@ -3,32 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anshu's Special Invite</title>
+    <title>Date Invitation</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background: linear-gradient(45deg, #ff758c, #ff7eb3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: white;
             text-align: center;
-            padding: 50px;
+            overflow: hidden;
         }
+
         .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
+
         h1 {
-            color: #333;
+            font-size: 2.5rem;
         }
-        p {
-            font-size: 18px;
+
+        .btn-group {
+            margin-top: 20px;
+        }
+
+        button {
+            background: #ff416c;
+            border: none;
+            padding: 1rem 2rem;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            color: white;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        #message {
+            margin-top: 30px;
+            font-size: 1.5rem;
+        }
+
+        .heart, .balloon {
+            position: absolute;
+            bottom: -10px;
+            width: 30px;
+            height: 30px;
+            animation: float 5s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { transform: translateY(-100vh); opacity: 0; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to Anshu's Date Invite! 🌹</h1>
-        <p>I'm glad you're here. Let's plan something special together.</p>
+        <h1>Will you go on a date with me?</h1>
+        <div class="btn-group">
+            <button onclick="showMessage('yes')">Yes</button>
+            <button onclick="showMessage('no')">No</button>
+        </div>
+        <p id="message"></p>
     </div>
+
+    <script>
+        function showMessage(answer) {
+            const message = document.getElementById('message');
+            if (answer === 'yes') {
+                message.textContent = 'Thanks for accepting! I will see you soon on our date ❤️';
+            } else {
+                message.textContent = 'Technically there is no choice... Be ready tomorrow for the date! 😉';
+            }
+        }
+
+        function createFloatingElement(type) {
+            const element = document.createElement('div');
+            element.classList.add(type);
+            element.textContent = type === 'heart' ? '❤️' : '🎈';
+            element.style.left = `${Math.random() * 100}vw`;
+            element.style.animationDuration = `${3 + Math.random() * 5}s`;
+            document.body.appendChild(element);
+
+            setTimeout(() => element.remove(), 5000);
+        }
+
+        setInterval(() => createFloatingElement('heart'), 500);
+        setInterval(() => createFloatingElement('balloon'), 800);
+    </script>
 </body>
 </html>
